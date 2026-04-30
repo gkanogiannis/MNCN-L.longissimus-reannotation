@@ -1,0 +1,112 @@
+Bootstrap: docker
+From: nvidia/cuda:11.2.2-cudnn8-runtime-ubuntu20.04
+
+# =============================================================================
+# DeepTMHMM Singularity container (GPU-enabled)
+# =============================================================================
+# Author: Anestis Gkanogiannis <anestis@gkanogiannis.com> - MNCN-CSIC, 2026
+# =============================================================================
+
+#
+# Build (on a machine where you have the DTU license unpacked):
+#   sudo -E singularity build deeptmhmm.sif deeptmhmm.def
+#
+# Run:
+#   singularity run --nv --bind /data:/data deeptmhmm.sif \
+#       --fasta proteins.faa --output-dir results/
+#
+# Or equivalently:
+#   singularity exec --nv --bind /data:/data deeptmhmm.sif \
+#       python3 /opt/deeptmhmm/predict.py \
+#       --fasta proteins.faa --output-dir results/
+#
+# Requires:
+#   - DeepTMHMM academic license from DTU Health Tech
+#   - NVIDIA GPU + driver >= 11.2 on the host (--nv handles lib injection)
+# =============================================================================
+
+%files
+    ./DeepTMHMM-Academic-License-v1.0 /opt/deeptmhmm
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+
+    sed -i 's|http://archive.ubuntu.com/ubuntu|https://archive.ubuntu.com/ubuntu|g' /etc/apt/sources.list
+    sed -i 's|http://security.ubuntu.com/ubuntu|https://security.ubuntu.com/ubuntu|g' /etc/apt/sources.list
+
+    # ---------- System dependencies ----------
+    apt update && apt-get install -y --no-install-recommends \
+        python3 python3-pip python3-dev gcc g++ \
+        ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+    # Ensure pip is up to date
+    pip3 install --no-cache-dir --upgrade pip setuptools wheel typing_extensions
+
+    # ---------- PyTorch (CUDA 11.3 wheels -- compatible with runtime 11.2 / driver 11.5) ----------
+    pip3 install --no-cache-dir \
+        torch==1.12.1+cu113 \
+        torchvision==0.13.1+cu113 \
+        --extra-index-url https://download.pytorch.org/whl/cu113
+
+    # Fix: clear executable-stack flag (PF_X in PT_GNU_STACK) that
+    # Singularity's security profile blocks. Done via direct ELF edit
+    # since execstack/patchelf may not be available at the right version.
+    python3 -c "
+import struct, glob
+for path in glob.glob('/usr/local/lib/**/torch/**/*.so', recursive=True):
+    with open(path, 'r+b') as f:
+        if f.read(4) != b'\x7fELF': continue
+        ei_class, ei_data = struct.unpack('BB', f.read(2))
+        if ei_class != 2: continue  # skip non-64-bit
+        endian = '<' if ei_data == 1 else '>'
+        f.seek(32); e_phoff = struct.unpack(endian+'Q', f.read(8))[0]
+        f.seek(54); e_phentsize, e_phnum = struct.unpack(endian+'HH', f.read(4))
+        for i in range(e_phnum):
+            off = e_phoff + i * e_phentsize
+            f.seek(off); p_type = struct.unpack(endian+'I', f.read(4))[0]
+            if p_type == 0x6474e551:  # PT_GNU_STACK
+                p_flags = struct.unpack(endian+'I', f.read(4))[0]
+                if p_flags & 0x1:     # PF_X set
+                    f.seek(off + 4)
+                    f.write(struct.pack(endian+'I', p_flags & ~0x1))
+                    print(f'Cleared exec stack: {path}')
+                break
+"
+
+    # ---------- DeepTMHMM Python dependencies ----------
+    pip3 install --no-cache-dir \
+        biopython \
+        numpy \
+        pynvml \
+        tqdm \
+        fair-esm==0.4.0 \
+        matplotlib \
+        h5py \
+        PeptideBuilder
+
+    # If DeepTMHMM ships its own setup.py / pyproject.toml, install it as a
+    # proper package; otherwise predict.py is invoked directly.
+    if [ -f /opt/deeptmhmm/setup.py ] || [ -f /opt/deeptmhmm/pyproject.toml ]; then
+        pip3 install --no-cache-dir /opt/deeptmhmm
+    fi
+
+    # ---------- Cleanup ----------
+    apt-get purge -y gcc g++ python3-dev && \
+    apt-get autoremove -y && apt-get clean && \
+    rm -rf /root/.cache/pip
+
+%environment
+    export LC_ALL=C
+    export PATH="/opt/deeptmhmm:$PATH"
+    # Let PyTorch find CUDA libs injected by --nv
+    export LD_LIBRARY_PATH="/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+
+%runscript
+    cd /opt/deeptmhmm
+    exec python3 /opt/deeptmhmm/predict.py "$@"
+
+%labels
+    Version      1.0
+    CUDA_compat  Driver>=11.5 Runtime>=11.2
+    Description  DeepTMHMM transmembrane topology predictor (GPU-enabled)

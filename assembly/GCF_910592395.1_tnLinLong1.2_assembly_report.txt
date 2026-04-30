@@ -1,0 +1,63 @@
+# Assembly name:  tnLinLong1.2
+# Organism name:  Lineus longissimus (ribbon worms)
+# Taxid:          88925
+# BioSample:      SAMEA7522833
+# BioProject:     PRJEB45696
+# Submitter:      WELLCOME SANGER INSTITUTE
+# Date:           2022-02-13
+# Assembly type:  haploid (principal pseudohaplotype of diploid)
+# Release type:   major
+# Assembly level: Chromosome
+# Genome representation: full
+# WGS project:    CAJUZJ02
+# Assembly method: various
+# Genome coverage: 79x
+# Sequencing technology: PacBio,Illumina,Arima
+# RefSeq category: Reference Genome
+# GenBank assembly accession: GCA_910592395.2
+# RefSeq assembly accession: GCF_910592395.1
+# RefSeq assembly and GenBank assemblies identical: no
+# Linked assembly: GCA_910592375.2 (alternate pseudohaplotype of diploid)
+#
+## Assembly-Units:
+## GenBank Unit Accession	RefSeq Unit Accession	Assembly-Unit name
+## GCA_910592394.2	GCF_910592394.1	Primary Assembly
+## GCA_910592396.2		non-nuclear
+#
+# Ordered by chromosome/plasmid; the chromosomes/plasmids are followed by
+# unlocalized scaffolds.
+# Unplaced scaffolds are listed at the end.
+# RefSeq is equal or derived from GenBank object.
+#
+# Sequence-Name	Sequence-Role	Assigned-Molecule	Assigned-Molecule-Location/Type	GenBank-Accn	Relationship	RefSeq-Accn	Assembly-Unit	Sequence-Length	UCSC-style-name
+SUPER_1	assembled-molecule	1	Chromosome	OU342992.1	=	NC_088308.1	Primary Assembly	29445314	na
+SUPER_2	assembled-molecule	2	Chromosome	OU342993.1	=	NC_088309.1	Primary Assembly	29188318	na
+SUPER_3	assembled-molecule	3	Chromosome	OU342994.1	=	NC_088310.1	Primary Assembly	29083594	na
+SUPER_4	assembled-molecule	4	Chromosome	OU342995.1	=	NC_088311.1	Primary Assembly	25598605	na
+SUPER_5	assembled-molecule	5	Chromosome	OU342996.1	=	NC_088312.1	Primary Assembly	23943388	na
+SUPER_6	assembled-molecule	6	Chromosome	OU342997.1	=	NC_088313.1	Primary Assembly	21663950	na
+SUPER_7	assembled-molecule	7	Chromosome	OU342998.1	=	NC_088314.1	Primary Assembly	21159187	na
+SUPER_8	assembled-molecule	8	Chromosome	OU342999.1	=	NC_088315.1	Primary Assembly	20961375	na
+SUPER_9	assembled-molecule	9	Chromosome	OU343000.1	=	NC_088316.1	Primary Assembly	20549149	na
+SUPER_10	assembled-molecule	10	Chromosome	OU343001.1	=	NC_088317.1	Primary Assembly	19406143	na
+SUPER_11	assembled-molecule	11	Chromosome	OU343002.1	=	NC_088318.1	Primary Assembly	19191461	na
+SUPER_12	assembled-molecule	12	Chromosome	OU343003.1	=	NC_088319.1	Primary Assembly	17976742	na
+SUPER_13	assembled-molecule	13	Chromosome	OU343004.1	=	NC_088320.1	Primary Assembly	16850461	na
+SUPER_14	assembled-molecule	14	Chromosome	OU343005.1	=	NC_088321.1	Primary Assembly	16759716	na
+SUPER_15	assembled-molecule	15	Chromosome	OU343006.1	=	NC_088322.1	Primary Assembly	16292257	na
+SUPER_16	assembled-molecule	16	Chromosome	OU343007.1	=	NC_088323.1	Primary Assembly	16534156	na
+SUPER_17	assembled-molecule	17	Chromosome	OU343008.1	=	NC_088324.1	Primary Assembly	16304662	na
+SUPER_18	assembled-molecule	18	Chromosome	OU343009.1	=	NC_088325.1	Primary Assembly	15888539	na
+SUPER_19	assembled-molecule	19	Chromosome	OU343010.1	=	NC_088326.1	Primary Assembly	13632599	na
+SUPER_17_unloc_1	unlocalized-scaffold	17	Chromosome	CAJUZJ020000008.1	=	NW_027020272.1	Primary Assembly	33576	na
+contig1	unplaced-scaffold	na	na	CAJUZJ020000001.1	=	NW_027020273.1	Primary Assembly	20679	na
+contig2	unplaced-scaffold	na	na	CAJUZJ020000002.1	=	NW_027020274.1	Primary Assembly	9178	na
+contig3	unplaced-scaffold	na	na	CAJUZJ020000003.1	=	NW_027020275.1	Primary Assembly	62511	na
+contig4	unplaced-scaffold	na	na	CAJUZJ020000004.1	=	NW_027020276.1	Primary Assembly	46920	na
+contig5	unplaced-scaffold	na	na	CAJUZJ020000005.1	=	NW_027020277.1	Primary Assembly	44279	na
+contig6	unplaced-scaffold	na	na	CAJUZJ020000006.1	=	NW_027020278.1	Primary Assembly	36307	na
+contig7	unplaced-scaffold	na	na	CAJUZJ020000007.1	=	NW_027020279.1	Primary Assembly	35095	na
+contig9	unplaced-scaffold	na	na	CAJUZJ020000009.1	=	NW_027020280.1	Primary Assembly	31400	na
+contig10	unplaced-scaffold	na	na	CAJUZJ020000010.1	=	NW_027020281.1	Primary Assembly	221868	na
+contig11	unplaced-scaffold	na	na	CAJUZJ020000011.1	=	NW_027020282.1	Primary Assembly	194103	na
+scaffold_MT	assembled-molecule	MT	Mitochondrion	OU343011.1	<>	na	non-nuclear	15284	na

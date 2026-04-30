@@ -1,0 +1,18 @@
+# Feature	Class	Full Assembly	Assembly-unit accession	Assembly-unit name	Unique Ids	Placements
+CDS	with_protein	GCF_910592395.1	GCF_910592394.1	Primary Assembly	34875	34875
+gene	lncRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	1716	1716
+gene	ncRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	6	6
+gene	protein_coding	GCF_910592395.1	GCF_910592394.1	Primary Assembly	17976	17976
+gene	pseudogene	GCF_910592395.1	GCF_910592394.1	Primary Assembly	129	129
+gene	rRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	477	477
+gene	snRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	319	319
+gene	snoRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	79	79
+gene	tRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	501	501
+mRNA		GCF_910592395.1	GCF_910592394.1	Primary Assembly	34875	34875
+misc_RNA		GCF_910592395.1	GCF_910592394.1	Primary Assembly	659	659
+ncRNA	lncRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	2161	2161
+ncRNA	scaRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	6	6
+ncRNA	snRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	319	319
+ncRNA	snoRNA	GCF_910592395.1	GCF_910592394.1	Primary Assembly	79	79
+rRNA		GCF_910592395.1	GCF_910592394.1	Primary Assembly	477	477
+tRNA		GCF_910592395.1	GCF_910592394.1	Primary Assembly	na	501

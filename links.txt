@@ -1,0 +1,2 @@
+https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/910/592/395/GCF_910592395.1_tnLinLong1.2/
+https://www.ncbi.nlm.nih.gov/refseq/annotation_euk/Lineus_longissimus/GCF_910592395.1-RS_2024_04/
